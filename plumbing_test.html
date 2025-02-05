@@ -21,22 +21,15 @@
       </div>
     </model-viewer>  
 
-    <!-- Animation Buttons -->
+     <!-- Animation Control Buttons -->
     <div class="controls">
-      <button onclick="playAnimation('Close_Shut_Off_Valve_Step_3')">Close Shut Off Valve</button>
-      <button onclick="playAnimation('Large_Valves_Open')">Open Large Valves</button>
-      <button onclick="playAnimation('Large_Arrow_Flow')">Large Arrow Flow</button>
+      <button id="close-valve-btn">Close Shut Off Valve</button>
+      <button id="open-valve-btn">Open Large Valves</button>
+      <button id="arrow-flow-btn">Large Arrow Flow</button>
     </div>
 
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-
-    <script>
-      function playAnimation(animationName) {
-        const modelViewer = document.querySelector("#model");
-        modelViewer.play({ animationName });
-      }
-    </script>
   </body>
 </html>
