@@ -40,43 +40,26 @@
         shadow-intensity="1">
     </model-viewer>
 
-    <!-- Buttons for Animations -->
-    <div class="button-container">
-        <button id="close-valve-btn">Close Shut Off Valve</button>
-        <button id="open-valve-btn">Open Large Valves</button>
-        <button id="arrow-flow-btn">Show Large Arrow Flow</button>
-    </div>
+<!-- Buttons to trigger animations -->
+<button onclick="playAnimation('Close_Shut_Off_Valve_Step_3')">Close Shut Off Valve Step 3</button>
+<button onclick="playAnimation('Large_Valves_Open')">Large Valves Open</button>
+<button onclick="playAnimation('Large_Arrow_Flow')">Large Arrow Flow</button>
 
     <!-- JavaScript -->
     <script>
-       document.addEventListener("DOMContentLoaded", () => {
-    const modelViewer = document.querySelector("#model");
+// Function to play animations
+const playAnimation = (animationName) => {
+   console.log(`Button clicked: Playing animation - ${animationName}`);
 
-    if (!modelViewer) {
-        console.error("Model Viewer element not found!");
-        return;
-    }
+   const modelViewer = document.querySelector("#model");
 
-    // Function to play animations
-    const playAnimation = (animationName) => {
-        console.log(`Button clicked: Playing animation - ${animationName}`);
-
-        if (modelViewer) {
-            modelViewer.play({
-                animationName, 
-                repetitions: 1, 
-                pingpong: false
-            });
-        } else {
-            console.error("Model viewer element not found.");
-        }
-    };
-
-    // Attach event listeners to buttons (inside DOMContentLoaded to ensure they exist)
-    document.querySelector("#close-valve-btn").addEventListener("click", () => playAnimation("Close_Shut_Off_Valve_Step_3"));
-    document.querySelector("#open-valve-btn").addEventListener("click", () => playAnimation("Large_Valves_Open"));
-    document.querySelector("#arrow-flow-btn").addEventListener("click", () => playAnimation("Large_Arrow_Flow"));
-});
+   if (modelViewer) {
+      modelViewer.animationName = animationName; // Set the animation name
+      modelViewer.play(); // Play the animation
+   } else {
+      console.error("Model viewer element not found!");
+   }
+};
     </script>
 
 </body>
