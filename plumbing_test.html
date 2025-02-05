@@ -10,10 +10,11 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
+            background: #00000;
         }
         model-viewer {
             width: 100%;
-            height: 500px;
+            height: 100%;
         }
         .button-container {
             margin-top: 20px;
@@ -48,30 +49,34 @@
 
     <!-- JavaScript -->
     <script>
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     const modelViewer = document.querySelector("#model");
+       document.addEventListener("DOMContentLoaded", () => {
+    const modelViewer = document.querySelector("#model");
 
-        //     // Function to play animations
-        //     const playAnimation = (animationName) => {
-        //         console.log(`Button clicked: Playing animation - ${animationName}`);
+    if (!modelViewer) {
+        console.error("Model Viewer element not found!");
+        return;
+    }
 
-        //         if (modelViewer) {
-        //             modelViewer.play({
-        //                 animationName, 
-        //                 repetitions: 1,
-        //                 pingpong: false
-        //             });
-        //         } else {
-        //             console.error("Model viewer element not found.");
-        //         }
-        //     };
+    // Function to play animations
+    const playAnimation = (animationName) => {
+        console.log(`Button clicked: Playing animation - ${animationName}`);
 
-            // Attach event listeners to buttons
-            // document.querySelector("#close-valve-btn").addEventListener("click", () =>  modelViewer.play("Close_Shut_Off_Valve_Step_3"));
-            document.querySelector("#close-valve-btn").addEventListener("click", () => {modelViewer.play({ animationName: "Close_Shut_Off_Valve_Step_3", repetitions: 1, pingpong: false });
-            document.querySelector("#open-valve-btn").addEventListener("click", () => playAnimation("Large_Valves_Open"));
-            document.querySelector("#arrow-flow-btn").addEventListener("click", () => playAnimation("Large_Arrow_Flow"));
-        });
+        if (modelViewer) {
+            modelViewer.play({
+                animationName, 
+                repetitions: 1, 
+                pingpong: false
+            });
+        } else {
+            console.error("Model viewer element not found.");
+        }
+    };
+
+    // Attach event listeners to buttons (inside DOMContentLoaded to ensure they exist)
+    document.querySelector("#close-valve-btn").addEventListener("click", () => playAnimation("Close_Shut_Off_Valve_Step_3"));
+    document.querySelector("#open-valve-btn").addEventListener("click", () => playAnimation("Large_Valves_Open"));
+    document.querySelector("#arrow-flow-btn").addEventListener("click", () => playAnimation("Large_Arrow_Flow"));
+});
     </script>
 
 </body>
