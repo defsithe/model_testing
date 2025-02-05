@@ -16,7 +16,11 @@ document.querySelector('model-viewer').addEventListener('progress', onProgress);
 const playAnimation = (animationName) => {
   const modelViewer = document.querySelector("#model");
   if (modelViewer) {
-    modelViewer.play({ animationName });
+    modelViewer.play({ 
+      animationName,      // Play the specified animation
+      repetitions: 1,     // Play once (change this if needed)
+      pingpong: false     // Play forward only (set to true for back and forth motion)
+    });
   } else {
     console.error("Model viewer element not found.");
   }
