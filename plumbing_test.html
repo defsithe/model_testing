@@ -1,83 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Model Viewer Template</title>
-    <meta charset="utf-8">
-    <meta name="description" content="Model Viewer Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="./styles.css" rel="stylesheet"/>
-  </head>
-  <body>
-    <!-- <model-viewer> HTML element -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Viewer Animation</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        model-viewer {
+            width: 100%;
+            height: 500px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Model Viewer -->
     <model-viewer id="model" 
-      src="models/RPBPD_FINAL_ALL_ANIMATIONS.glb" 
-      ar 
-      ar-modes="webxr scene-viewer quick-look" 
-      camera-controls 
-      tone-mapping="neutral" 
-      poster="TSTC_IDS.png" 
-      shadow-intensity="1" 
-      autoplay>
-      
-      <div class="progress-bar hide" slot="progress-bar">
-        <div class="update-bar"></div>
-      </div>
+        src="models/RPBPD_FINAL_ALL_ANIMATIONS.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        tone-mapping="neutral" 
+        poster="TSTC_IDS.png" 
+        shadow-intensity="1">
+    </model-viewer>
 
-      <button slot="ar-button" id="ar-button">
-        View in your space
-      </button>
-
-      <div id="ar-prompt">
-        <img src="ar_hand_prompt.png">
-      </div>
-    </model-viewer>  
-
-    <!-- Animation Control Buttons -->
-    <div class="controls">
-      <button id="close-valve-btn">Close Shut Off Valve</button>
-      <button id="open-valve-btn">Open Large Valves</button>
-      <button id="arrow-flow-btn">Large Arrow Flow</button>
+    <!-- Buttons for Animations -->
+    <div class="button-container">
+        <button id="close-valve-btn">Close Shut Off Valve</button>
+        <button id="open-valve-btn">Open Large Valves</button>
+        <button id="arrow-flow-btn">Show Large Arrow Flow</button>
     </div>
 
+    <!-- JavaScript -->
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const modelViewer = document.querySelector("#model");
+        document.addEventListener("DOMContentLoaded", () => {
+            const modelViewer = document.querySelector("#model");
 
-    // Function to play animations with debugging
-    const playAnimation = (animationName) => {
-      console.log(`Button clicked: Playing animation - ${animationName}`); // Debugging log
+            // Function to play animations
+            const playAnimation = (animationName) => {
+                console.log(`Button clicked: Playing animation - ${animationName}`);
 
-      if (modelViewer) {
-        modelViewer.play({
-          animationName, 
-          repetitions: 1,   // Play once
-          pingpong: false   // Play forward only
+                if (modelViewer) {
+                    modelViewer.play({
+                        animationName, 
+                        repetitions: 1,
+                        pingpong: false
+                    });
+                } else {
+                    console.error("Model viewer element not found.");
+                }
+            };
+
+            // Attach event listeners to buttons
+            document.querySelector("#close-valve-btn").addEventListener("click", () => playAnimation("Close_Shut_Off_Valve_Step_3"));
+            document.querySelector("#open-valve-btn").addEventListener("click", () => playAnimation("Large_Valves_Open"));
+            document.querySelector("#arrow-flow-btn").addEventListener("click", () => playAnimation("Large_Arrow_Flow"));
         });
-      } else {
-        console.error("Model viewer element not found.");
-      }
-    };
+    </script>
 
-    // Attach event listeners with console logs
-    document.querySelector("#close-valve-btn").addEventListener("click", () => {
-      console.log("Close Shut Off Valve button clicked.");
-      playAnimation("Close_Shut_Off_Valve_Step_3");
-    });
-
-    document.querySelector("#open-valve-btn").addEventListener("click", () => {
-      console.log("Open Large Valves button clicked.");
-      playAnimation("Large_Valves_Open");
-    });
-
-    document.querySelector("#arrow-flow-btn").addEventListener("click", () => {
-      console.log("Large Arrow Flow button clicked.");
-      playAnimation("Large_Arrow_Flow");
-    });
-
-    
-</script>
-
-    <!-- Loads <model-viewer> for browsers -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-  </body>
+</body>
 </html>
