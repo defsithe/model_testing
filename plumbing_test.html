@@ -48,26 +48,27 @@
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const modelViewer = document.querySelector("#model");
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const modelViewer = document.querySelector("#model");
 
-            // Function to play animations
-            const playAnimation = (animationName) => {
-                console.log(`Button clicked: Playing animation - ${animationName}`);
+        //     // Function to play animations
+        //     const playAnimation = (animationName) => {
+        //         console.log(`Button clicked: Playing animation - ${animationName}`);
 
-                if (modelViewer) {
-                    modelViewer.play({
-                        animationName, 
-                        repetitions: 1,
-                        pingpong: false
-                    });
-                } else {
-                    console.error("Model viewer element not found.");
-                }
-            };
+        //         if (modelViewer) {
+        //             modelViewer.play({
+        //                 animationName, 
+        //                 repetitions: 1,
+        //                 pingpong: false
+        //             });
+        //         } else {
+        //             console.error("Model viewer element not found.");
+        //         }
+        //     };
 
             // Attach event listeners to buttons
-            document.querySelector("#close-valve-btn").addEventListener("click", () => playAnimation("Close_Shut_Off_Valve_Step_3"));
+            // document.querySelector("#close-valve-btn").addEventListener("click", () =>  modelViewer.play("Close_Shut_Off_Valve_Step_3"));
+            document.querySelector("#close-valve-btn").addEventListener("click", () => {modelViewer.play({ animationName: "Close_Shut_Off_Valve_Step_3", repetitions: 1, pingpong: false });
             document.querySelector("#open-valve-btn").addEventListener("click", () => playAnimation("Large_Valves_Open"));
             document.querySelector("#arrow-flow-btn").addEventListener("click", () => playAnimation("Large_Arrow_Flow"));
         });
