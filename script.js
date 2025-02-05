@@ -11,3 +11,20 @@ const onProgress = (event) => {
   }
 };
 document.querySelector('model-viewer').addEventListener('progress', onProgress);
+
+// Function to play animations
+const playAnimation = (animationName) => {
+  const modelViewer = document.querySelector("#model");
+  if (modelViewer) {
+    modelViewer.play({ animationName });
+  } else {
+    console.error("Model viewer element not found.");
+  }
+};
+
+// Attach event listeners to animation buttons
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("close-valve-btn").addEventListener("click", () => playAnimation("Close_Shut_Off_Valve_Step_3"));
+  document.getElementById("open-valve-btn").addEventListener("click", () => playAnimation("Large_Valves_Open"));
+  document.getElementById("arrow-flow-btn").addEventListener("click", () => playAnimation("Large_Arrow_Flow"));
+});
